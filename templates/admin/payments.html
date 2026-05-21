@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Payment Verification{% endblock %}
+{% block content %}
+<h3 class="fw-bold mb-4"><i class="bi bi-credit-card me-2 text-primary"></i>Payment Verification</h3>
+<div class="table-responsive">
+    <table class="table table-hover shadow-sm align-middle">
+        <thead class="table-dark">
+            <tr><th>#</th><th>Order #</th><th>Customer</th><th>Method</th><th>Amount</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for p in payments %}
+            <tr>
+                <td>{{ p.PaymentID }}</td>
+                <td>#{{ p.OrderID }}</td>
+                <td>{{ p.customer.FullName if p.customer else '–' }}</td>
+                <td>{{ p.method.MethodName if p.method else '–' }}</td>
+                <td class="fw-bold">${{ "%.2f"|format(p.Amount) }}</td>
+                <td>{{ p.PaymentDate.strftime('%b %d, %Y') }}</td>
+                <td><span class="badge bg-{{ 'success' if p.Status=='Verified' else 'danger' if p.Status=='Rejected' else 'secondary' }}">{{ p.Status }}</span></td>
+                <td>
+                    {% if p.Status == 'Pending' %}
+                    <form method="POST" action="{{ url_for('admin.verify_payment', pid=p.PaymentID) }}" class="d-flex gap-1">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button name="action" value="verify" class="btn btn-sm btn-success">
+                            <i class="bi bi-check-lg"></i> Verify
+                        </button>
+                        <button name="action" value="reject" class="btn btn-sm btn-danger">
+                            <i class="bi bi-x-lg"></i> Reject
+                        </button>
+                    </form>
+                    {% else %}–{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
