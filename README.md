@@ -189,7 +189,6 @@ shopease/
 ├── seed_db.py              # Insert sample data
 ├── seed_data.sql           # Raw SQL seed
 ├── create_admin.py         # Interactive admin account creator
-└── drop_and_recreate_db.py # Hard reset (dev only)
 ```
 
 ---
