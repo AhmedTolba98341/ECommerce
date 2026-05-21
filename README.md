@@ -150,7 +150,6 @@ Visit: **http://127.0.0.1:5000**
 |----------|----------|----------|
 | Admin    | admin    | admin123 |
 
-> ⚠️ Change the default password before any public deployment.
 
 ---
 
