@@ -441,6 +441,7 @@ ECommerceProject/
 ├── drop_and_recreate_db.py  # Database reset script
 ├── verify_database_connection.py      # DB verification
 ├── comprehensive_stack_verification.py # Full stack verification
+├── comprehensive_stack_verification.py # DB and full stack verification
 ├── routes/                   # Blueprint route handlers
 │   ├── __init__.py
 │   ├── auth_routes.py       # Authentication routes
