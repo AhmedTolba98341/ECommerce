@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Register – ShopEase{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h3 class="card-title text-center mb-4 fw-bold">
+                    <i class="bi bi-person-plus-fill me-2 text-success"></i>Create Account
+                </h3>
+                <form method="POST" action="{{ url_for('auth.register') }}" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    {% macro field(f, label, type="text", ph="") %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ label }}</label>
+                        <input type="{{ type }}" name="{{ f.name }}" id="{{ f.id }}"
+                               class="form-control {{ 'is-invalid' if f.errors }}"
+                               placeholder="{{ ph }}" value="{{ f.data or '' }}">
+                        {% for e in f.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+                    </div>
+                    {% endmacro %}
+
+                    {{ field(form.full_name, "Full Name", ph="Your full name") }}
+                    {{ field(form.email, "Email", type="email", ph="you@example.com") }}
+                    {{ field(form.username, "Username", ph="Choose a username") }}
+                    {{ field(form.password, "Password", type="password", ph="Min 6 characters") }}
+                    {{ field(form.confirm, "Confirm Password", type="password", ph="Repeat password") }}
+                    {{ field(form.phone, "Phone (optional)", ph="+1 234 567 8900") }}
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Address (optional)</label>
+                        {{ form.address(class="form-control", placeholder="Your shipping address") }}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Create Account</button>
+                    </div>
+                </form>
+
+                <hr>
+                <p class="text-center mb-0">
+                    Already have an account?
+                    <a href="{{ url_for('auth.login') }}" class="text-primary fw-semibold">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

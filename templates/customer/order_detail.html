@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Order #{{ order.OrderID }}{% endblock %}
+{% block content %}
+<a href="{{ url_for('customer.orders') }}" class="btn btn-outline-secondary mb-3"><i class="bi bi-arrow-left me-1"></i>Back</a>
+<h3 class="fw-bold mb-4">Order #{{ order.OrderID }}</h3>
+<div class="row g-4">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">Items</div>
+            <div class="card-body">
+                <table class="table align-middle">
+                    <thead><tr><th>Product</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr></thead>
+                    <tbody>
+                        {% for oi in order.order_items %}
+                        <tr>
+                            <td>{{ oi.product.ProductName }}</td>
+                            <td>{{ oi.Quantity }}</td>
+                            <td>${{ "%.2f"|format(oi.UnitPrice) }}</td>
+                            <td>${{ "%.2f"|format(oi.UnitPrice * oi.Quantity) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr><th colspan="3" class="text-end">Total:</th><th>${{ "%.2f"|format(order.TotalAmount) }}</th></tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header fw-bold">Order Info</div>
+            <div class="card-body">
+                <p><strong>Status:</strong>
+                    <span class="badge bg-{{ 'success' if order.Status=='Delivered' else 'warning text-dark' if order.Status=='Pending' else 'info' }}">
+                        {{ order.Status }}
+                    </span>
+                </p>
+                <p><strong>Date:</strong> {{ order.OrderDate.strftime('%b %d, %Y %H:%M') }}</p>
+                <p><strong>Shipping Address:</strong><br>{{ order.ShippingAddress }}</p>
+            </div>
+        </div>
+        {% if order.payment %}
+        <div class="card shadow-sm">
+            <div class="card-header fw-bold">Payment</div>
+            <div class="card-body">
+                <p><strong>Method:</strong> {{ order.payment.method.MethodName if order.payment.method else '–' }}</p>
+                <p><strong>Amount:</strong> ${{ "%.2f"|format(order.payment.Amount) }}</p>
+                <p><strong>Status:</strong>
+                    <span class="badge bg-{{ 'success' if order.payment.Status=='Verified' else 'danger' if order.payment.Status=='Rejected' else 'secondary' }}">
+                        {{ order.payment.Status }}
+                    </span>
+                </p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

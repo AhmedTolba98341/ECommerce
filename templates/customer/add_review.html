@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Review – {{ product.ProductName }}{% endblock %}
+{% block content %}
+<h3 class="fw-bold mb-4"><i class="bi bi-star me-2 text-primary"></i>Review: {{ product.ProductName }}</h3>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Rating</label>
+                        {{ form.rating(class="form-select") }}
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Comment</label>
+                        {{ form.comment(class="form-control", rows=4, placeholder="Share your experience…") }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                    <a href="{{ url_for('product_detail', pid=product.ProductID) }}" class="btn btn-outline-secondary ms-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

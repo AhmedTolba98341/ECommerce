@@ -1,0 +1,81 @@
+/* ── ShopEase Custom Styles ─────────────────────────────────────────────── */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Hero Banner */
+.hero-banner {
+    background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+    min-height: 260px;
+    border-radius: 1rem;
+}
+
+/* Product Cards */
+.product-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+}
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+.product-img-placeholder {
+    height: 200px;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Sidebar / Admin nav */
+.admin-sidebar {
+    min-height: 100vh;
+    background: #212529;
+}
+
+/* Tables */
+.table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 0.75rem;
+}
+.card-header {
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.5rem;
+}
+
+/* Footer */
+footer {
+    font-size: 0.9rem;
+}
+
+/* Form controls */
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.15);
+}

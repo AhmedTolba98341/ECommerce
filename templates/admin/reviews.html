@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Review Moderation{% endblock %}
+{% block content %}
+<h3 class="fw-bold mb-4"><i class="bi bi-star me-2 text-primary"></i>Review Moderation</h3>
+<div class="table-responsive">
+    <table class="table table-hover shadow-sm align-middle">
+        <thead class="table-dark">
+            <tr><th>#</th><th>Product</th><th>Customer</th><th>Rating</th><th>Comment</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            {% for r in reviews %}
+            <tr>
+                <td>{{ r.ReviewID }}</td>
+                <td>{{ r.product.ProductName if r.product else '–' }}</td>
+                <td>{{ r.customer.FullName if r.customer else '–' }}</td>
+                <td>
+                    <span class="text-warning">
+                        {% for i in range(r.Rating) %}<i class="bi bi-star-fill"></i>{% endfor %}
+                    </span>
+                </td>
+                <td>{{ (r.Comment or '')[:60] }}{% if r.Comment and r.Comment|length > 60 %}…{% endif %}</td>
+                <td><span class="badge bg-{{ 'success' if r.Status=='Approved' else 'danger' if r.Status=='Rejected' else 'secondary' }}">{{ r.Status }}</span></td>
+                <td>
+                    {% if r.Status == 'Pending' %}
+                    <form method="POST" action="{{ url_for('admin.moderate_review', rid=r.ReviewID) }}" class="d-flex gap-1">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button name="action" value="approve" class="btn btn-sm btn-success"><i class="bi bi-check-lg"></i></button>
+                        <button name="action" value="reject" class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+                    </form>
+                    {% else %}–{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
