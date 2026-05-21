@@ -29,6 +29,9 @@ Password: admin123
 
 | Document | Purpose | Read Time |
 |----------|---------|-----------|
+| **[QUICKSTART.md](./QUICKSTART.md)** | Get running in 5 minutes | ⭐⭐⭐ 5 min |
+| **[ARCHITECTURE.md](./ARCHITECTURE.md)** | Complete technical reference | ⭐⭐⭐ 20 min |
+| **[VERIFICATION_REPORT.md](./VERIFICATION_REPORT.md)** | Proof all systems operational | ⭐⭐⭐ 10 min |
 | **[ARCHITECTURE.md](./ARCHITECTURE.md)** | Complete technical reference | ⭐⭐⭐ 20 min |
 
 ---
